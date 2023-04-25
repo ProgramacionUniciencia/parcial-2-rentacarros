@@ -1,0 +1,124 @@
+public class Rentadecarros {
+private String preorden = "";
+    private String preOrden(Nodo n) {
+        if (n != null) {
+            preorden += "\n" + n.getValor();
+            preOrden(n.getIzq());
+            preOrden(n.getDer());
+        }
+        return preorden;
+    }
+    private String inorden = "";
+
+    private String inOrden(Nodo n) {
+        if (n != null) {
+            inOrden(n.getIzq());
+            inorden += "\n" + n.getValor();
+            inOrden(n.getDer());
+        }
+        return inorden;
+    }
+    private String posorden = "";
+   
+    private String posOrden(Nodo n) {
+        if (n != null) {
+            posOrden(n.getIzq());
+            posOrden(n.getDer());
+            posorden += "\n" + n.getValor();
+        }
+        return posorden;
+    }
+
+    int contador = 0;
+    /**
+     * metodo para contar el numero de hojas que tiene el arbol
+     * @param n
+     * @return
+     */
+    private int contarRamas(Nodo n) {
+        if (n != null) {
+            int izq = contarRamas(n.getIzq());
+            int der = contarRamas(n.getDer());
+            contador = izq + der + 1;
+        } else {
+            return 0;
+        }
+
+        return contador;
+    }
+    /**
+     * metodo para calcular la rama con mas altura del arbol
+     * @param n
+     * @return
+     */
+    private int calcularAltura(Nodo n) {
+        if (n == null) {
+            return 0;
+        }
+        int n1 = calcularAltura(n.izq);
+        int n2 = calcularAltura(n.der);
+        if (n1 > n2) {
+            return n1 + 1;
+        }
+        return n2 + 1;
+    }
+
+    public Rentadecarros() {
+        Nodo raiz = new Nodo(18);
+        raiz.izq = new Nodo(6);
+        raiz.der = new Nodo(21);
+        raiz.izq.izq = new Nodo(15);
+        raiz.izq.der = new Nodo(9);
+        System.out.println("preorden: Numero de carros por seccion " + preOrden(raiz));
+        System.out.println("inorden: marca de carro; chevrolet, nissan, renault, y ford  " + inOrden(raiz));
+        System.out.println("posorden: color de carro; rojo, azul, verde, y negro " + posOrden(raiz));
+        System.out.println("numero de Ramas: " + contarRamas(raiz));
+        System.out.println("altura: " + calcularAltura(raiz));
+       
+    }
+    public static void main(String[] args) {
+        new Rentadecarros();
+//        mostrarRaiz(raiz, 4);
+   
+        }
+
+    }
+
+
+
+
+public class Nodo {
+   
+public int valor;
+   public Nodo der;
+   public Nodo izq;
+   
+   public Nodo(int valor) {
+       this.valor = valor;
+   }
+
+   public int getValor() {
+       return valor;
+   }
+
+   public void setValor(int valor) {
+       this.valor = valor;
+   }
+
+   public Nodo getDer() {
+       return der;
+   }
+
+   public void setDer(Nodo der) {
+       this.der = der;
+   }
+
+   public Nodo getIzq() {
+       return izq;
+   }
+
+   public void setIzq(Nodo izq) {
+       this.izq = izq;
+   }
+   
+}
